@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Miniver';
+    ascent-override: url('../assets/fonts/miniver.ttf');
+}
+
+@font-face {
+    font-family: 'Kaushan';
+    src: url('../assets/fonts/kaushan.ttf');
+}
