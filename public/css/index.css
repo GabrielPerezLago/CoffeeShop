@@ -1,0 +1,27 @@
+@import 'text.font.css';
+
+:root {
+    --primary-color: #3E2723;
+    --secondary-color: #703B22;
+    --text-color: #F6E8D9;
+    --hover-color: #E4C7A1;
+    --light-color: #FEFCF8;
+
+    --text-font: 'Kahushan';
+    --title-font: 'Miniver';
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    font-family: var(--text-font);
+}
+
+
