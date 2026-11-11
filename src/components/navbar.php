@@ -2,10 +2,12 @@
 
 namespace components;
 
-    return fn(string|null $pemission) =>  '
-        <nav class="navbar">
-            <a href="">Início</a>
-            <a href="">Tienda</a>
-            <a href="">SobreNosotros</a>
-        </nav>
-    ';
+
+    return fn(array $childs) =>
+        '<nav class="navbar">' .
+        implode('', array_map(
+            fn($link, $name) => '<a href="?page=' . htmlspecialchars($link) . '">' . htmlspecialchars($name) . '</a>',
+            array_keys($childs),
+            array_values($childs)
+        )) .
+        '</nav>';

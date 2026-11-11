@@ -1,4 +1,6 @@
-@import "text.font.css";
+@import url(navbar.css);
+@import url(text.font.css);
+
 
 :root {
     --primary-color: #3E2723;
@@ -9,6 +11,8 @@
 
     --text-font: 'Kaushan';
     --title-font: 'Miniver';
+
+    --header-radius: 0 0 0.5rem 0.5rem;
 }
 
 * {
@@ -32,4 +36,5 @@ body {
     justify-content: space-between;
     align-items: center;
     font-family: var(--title-font);
+    border-radius: var(--header-radius);
 }

@@ -6,9 +6,12 @@ class Library
 {
 
 
-    public function navbar()
+    public function navbar(array $children)
     {
         $navbar = require_once 'navbar.php';
-        return $navbar(null);
+
+        if ($children == null) $children = [];
+
+        return $navbar($children);
     }
 }

@@ -1,13 +1,14 @@
-.navbar
-{
+.navbar {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
 .navbar a {
     text-decoration: none;
     color: var(--text-color);
-
+    font-family: var(--title-font);
+    font-weight: bold;
 }
