@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
     gap: 1rem;
 }
 
@@ -11,4 +12,8 @@
     color: var(--text-color);
     font-family: var(--title-font);
     font-weight: bold;
+}
+
+.navbar img {
+    max-width: 1rem;
 }

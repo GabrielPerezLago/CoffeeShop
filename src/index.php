@@ -7,7 +7,7 @@
 
     $components = new Library();
     $router = new Router();
-    $page = $_GET["page"] ?? '/';
+    $page = $_GET["page"] ?? ($_COOKIE['page'] ?? '/');
 ?>
 
 <!doctype html>
@@ -16,15 +16,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="public/css/index.css">
-    <link rel="shortcut icon" href="../public/assets/icons/coffe_secondary_bold.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="public/assets/icons/coffe_secondary_bold.svg" type="image/x-icon">
     <title>CoffeeShop</title>
 </head>
 <body>
     <header class="header">
         <h2>CoffeeShop</h2>
         <?php echo $components->navbar([
-                '/about' => 'Hola',
-                '/login' => 'image',
+                '/about' => 'MAS',
+                '/login' => 'image:../public/assets/icons/user_text_color.svg',
         ]) ?>
     </header>
     <main>
