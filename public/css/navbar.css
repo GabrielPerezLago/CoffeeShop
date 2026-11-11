@@ -1,0 +1,13 @@
+.navbar
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-color);
+
+}

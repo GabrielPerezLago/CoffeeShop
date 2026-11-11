@@ -1,4 +1,5 @@
-# CoffeeShop <img src="./public/assets/icons/coffee_primary.svg" alt="icono cafe" width="20">
+
+# CoffeeShop <img src="./public/assets/icons/coffe_secondary_bold.svg" alt="icono cafe" width="20">
 
 ---
 
@@ -13,13 +14,23 @@ Esta pagina esta enfocada a la venta de café exclusivo y con un sistema de role
 |---|---|---| 
 |MONGODB| PHP | CSS|
 
+
+## Instalción
+
+**Levantar el contenedor de mongo**
+
+```
+docker compose up -d
+docker compose exec web composer require mongodb/mongodb
+```
+
 ## Funcionamiento
 ***La app funciona de la siguiente manera:*** 
 
-### *Customer*
+### ***Customer***
 El cliente podra ver la tienda sin loguearse, pero para comprar algun producto tendra que Inicar Sessión / Registrarse , una vez hecho eso selecionara una catidad en cada producto y solicitara la compra la cual debe ser aceptada por un administrador.
 
-### Admin
+### ***Admin***
 El administrador (devera estar logueado) podra administrar los productos (CRUD) y vera una lista de solicitudes de compra las cuales tendra que administrar y aceptar segun criterio y stok.
 
 
