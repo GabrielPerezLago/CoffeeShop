@@ -1,5 +1,5 @@
 
-# CoffeeShop <img src="./public/assets/icons/coffe_secondary_bold.svg" alt="icono cafe" width="20">
+# CoffeeShop <img src="./src/public/assets/icons/coffe_secondary_bold.svg" alt="icono cafe" width="20">
 
 ---
 
