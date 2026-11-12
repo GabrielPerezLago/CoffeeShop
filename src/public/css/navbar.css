@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .navbar a {
@@ -15,5 +15,33 @@
 }
 
 .navbar img {
-    max-width: 1rem;
+    min-width: 4rem;
+    min-height: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar a:hover,
+.navbar img:hover{
+    color: var(--hover-color);
+    animation: acercar 0.5s ease-in;
+}
+
+@keyframes acercar {
+    0%
+    {
+        scale: 1.1;
+    }
+
+    50%
+    {
+        scale: 1.2;
+    }
+    75%
+    {
+        scale: 1.1;
+    }
+    100% {
+        scale: 1;
+    }
 }

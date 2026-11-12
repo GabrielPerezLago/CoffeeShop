@@ -1,6 +1,6 @@
 @import url(navbar.css);
 @import url(text.font.css);
-
+@import url(buttons.css);
 
 :root {
     --primary-color: #3E2723;
@@ -9,8 +9,8 @@
     --hover-color: #E4C7A1;
     --light-color: #FEFCF8;
 
-    --text-font: 'Kaushan';
-    --title-font: 'Miniver';
+    --title-font: 'Kaushan';
+    --text-font: 'Miniver';
 
     --header-radius: 0 0 0.5rem 0.5rem;
 }
@@ -27,6 +27,10 @@ body {
     color: var(--text-color);
 }
 
+h1, h2 ,h3
+{
+    font-family: var(--title-font);
+}
 
 .header {
     background-color: var(--secondary-color);
@@ -38,3 +42,6 @@ body {
     font-family: var(--title-font);
     border-radius: var(--header-radius);
 }
+
+
+

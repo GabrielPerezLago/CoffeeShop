@@ -11,7 +11,7 @@ namespace components;
                 if (str_contains($name, 'image:'))
                 {
                     $url = str_replace('image:', '', $name);
-                    return '<img href="?page=' . $link . '" src="' . $url . '" width="20" height="20" alt="User Img">';
+                    return '<a  href="?page=' . $link . '"><img src="' . $url . '" width="20" height="20" alt="User Img"></a>';
                 }
                 return '<a href="?page=' . htmlspecialchars($link) . '">' . htmlspecialchars($name) . '</a>';
             },
