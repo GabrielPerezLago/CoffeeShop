@@ -1,5 +1,5 @@
 <?php
-
+    ob_start();
     require_once __DIR__ . "/components/Library.php";
     require_once __DIR__ . "/pages/Router.php";
     use src\components\Library;
@@ -23,7 +23,7 @@
     <header class="header">
         <h2>CoffeeShop</h2>
         <?php echo $components->navbar([
-                $page !== '/' ?: '/' => 'Inicio',
+                 '/' =>  $page !== '/' ? 'Inicio' : null,
                 '/shop' => 'Tienda',
                 '/about' => 'Sobre Nosotros',
                 '/login' => 'image:../public/assets/icons/user_text_color.svg',

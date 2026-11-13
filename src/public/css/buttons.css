@@ -26,6 +26,7 @@
 }
 
 .btn-transparent {
+    text-decoration: none;
     cursor: pointer;
     border: none;
     padding: 0.5rem 1rem;
@@ -33,7 +34,7 @@
     color: var(--text-color);
     border-radius: 2rem;
 
-    font-family: var(--title-font), serif;
+    font-family: var(--text-font), serif;
 }
 
 .btn:hover

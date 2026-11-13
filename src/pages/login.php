@@ -1,10 +1,16 @@
 <?php
-    $is_register = $_COOKIE['is_register'] ?? true;
 
-    function register()
+    if (isset($_GET['action']) && ($_GET['action'] === 'login'|| $_GET['action'] === 'register') )
     {
+        $newVal = ($_GET['action'] === 'register') ? '1' : '0';
+        setCookie('is_register', $newVal, time() + (60 * 60 * 24 * 30));
 
+        $page = $_GET['page'] ?? '/login';
+        header('Location:?page=' . $page);
+        exit();
     }
+    $is_register = ($_COOKIE['is_register'] ?? '1') === '1';
+
 ?>
 
 <style>
@@ -53,7 +59,7 @@
         ?>
         <input name="email" type="email" placeholder="Email">
         <input name="password" type="password" placeholder="Contraseña" >
-        <input class="form-btn btn btn-sm" type="button" value="Enviar">
-        <input type="button" class="form-btn btn-transparent" value="Inicio Sesion">
+        <input type="button" class="form-btn btn btn-sm" <?php echo $is_register ? 'value="Registrarse"' : 'value="Iniciar Sesión"' ?>>
+        <a href="?page=/login&action=<?php echo $is_register ? 'login' : 'register'; ?>" class="form-btn btn-transparent"><?php echo $is_register ? 'Iniciar Sesión' : 'Registrate'?></a>
     </form>
 </section>

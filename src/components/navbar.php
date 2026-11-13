@@ -8,6 +8,7 @@ namespace components;
         implode('', array_map(
             function ($link, $name): string
             {
+                if ($link == null || $name == null) return'';
                 if (str_contains($name, 'image:'))
                 {
                     $url = str_replace('image:', '', $name);
