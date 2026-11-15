@@ -1,6 +1,16 @@
 <?php
     ob_start();
-    session_start(['rol' => $_SESSION['rol'] != null ? $_SESSION['rol'] : \app\Security\ROLES::GUEST->value]);
+
+    require_once __DIR__ . '/../app/Security/ROLES.php';
+    use app\Security\ROLES;
+
+    if (session_status() == PHP_SESSION_NONE)
+        session_start();
+
+    if (!isset($_SESSION['rol']))
+        $_SESSION['rol'] = ROLES::GUEST;
+
+
     require_once __DIR__ . "/components/Library.php";
     require_once __DIR__ . "/pages/Router.php";
     use src\components\Library;

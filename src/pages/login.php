@@ -1,4 +1,6 @@
 <?php
+    use App\Controllers\UserController;
+    use App\Security\ROLES;
 
     if (isset($_GET['action']) && ($_GET['action'] === 'login'|| $_GET['action'] === 'register') )
     {
@@ -11,6 +13,33 @@
     }
     $is_register = ($_COOKIE['is_register'] ?? '1') === '1';
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+        $user = new UserController();
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $username = $_POST['name'] ?? '';
+
+        try
+        {
+            if ($is_register)
+                $user->register($username, $email, $password, ROLES::GUEST->value);
+
+            else
+                $user->login($email, $password);
+
+            if (session_status() !== PHP_SESSION_NULL)
+            {
+
+            }
+
+
+        }
+        catch (Exception $e)
+        {
+
+        }
+    }
 ?>
 
 <style>
