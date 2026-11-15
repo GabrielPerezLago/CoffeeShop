@@ -18,7 +18,7 @@ class UserController
         return !isset(self::$user) && is_null(self::$user);
     }
 
-    public function login(final string $email, final string $password): void
+    public function login(string $email, string $password): void
     {
         try
         {
@@ -37,11 +37,11 @@ class UserController
         }
         catch (\RuntimeException $excp)
         {
-            $error = $esxcp->getMessage();
+            $error = $excp->getMessage();
         }
     }
 
-    public function regiter(final string $name, final string $email, final string $password, ?string $rol): void
+    public function regiter( string $name, string $email, string $password, ?string $rol): void
     {
         try
         {

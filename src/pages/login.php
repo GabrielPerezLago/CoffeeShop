@@ -2,6 +2,8 @@
     use App\Controllers\UserController;
     use App\Security\ROLES;
 
+    $toError = true;
+    $errorMessage = "Hola";
     if (isset($_GET['action']) && ($_GET['action'] === 'login'|| $_GET['action'] === 'register') )
     {
         $newVal = ($_GET['action'] === 'register') ? '1' : '0';
@@ -28,21 +30,41 @@
             else
                 $user->login($email, $password);
 
-            if (session_status() !== PHP_SESSION_NULL)
+            if (session_status() !== PHP_SESSION_NONE && (isset($_SESSION['rol']) && $_SESSION['rol'] !== ROLES::GUEST->value))
             {
-
+                header('Location:?page=/shop');
+                exit();
+            }
+            else
+            {
+                $toError = true;
+                $errorMessage = "Error al iniciar sesión";
             }
 
 
         }
-        catch (Exception $e)
+        catch (Exception $excp)
         {
-
+            $exception = $excp
+                    ->getMessage();
         }
     }
 ?>
 
 <style>
+    .error-wizzard
+    {
+        position: absolute;
+        background-color: var(--secondary-color);
+        width: 50vw;
+        height: 50vh;
+        box-shadow: 0.1rem 0.1rem 0 var(--hover-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
     .h3-form
     {
         font-size: 3rem;
@@ -81,6 +103,10 @@
     }
 </style>
 <section class="full-page">
+    <div class="error-wizzard" <?php echo $toError ? 'style="display: flex;"' : 'style="display: none"; ' ?> >
+        <h4 class="">Error</h4>
+        <p><?php echo $errorMessage ?? 'Prubea'; ?></p>
+    </div>
     <h3 class="h3-form"><?php echo $is_register ? 'Registrarse' : 'Iniciar Sesión' ;?></h3>
     <form class="form_container" method="post">
         <?php
