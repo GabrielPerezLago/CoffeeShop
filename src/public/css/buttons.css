@@ -1,12 +1,16 @@
 .btn
 {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
     border: none;
     padding: 0.5rem 1rem;
     background-color: var(--text-color);
     color: black;
     border-radius: 2rem;
-
+    text-align: center;
     font-family: var(--title-font), serif;
+
 }
 
 .btn-lg {

@@ -12,7 +12,8 @@ class Router
         $this->routes = [
             '/' => __DIR__ . '/home.php',
             '/login' => __DIR__ . '/login.php',
-            '/cart'
+            '/shop' => __DIR__ . '/shop.php',
+            '/profile' => __DIR__ . '/profile.php',
         ];
     }
 

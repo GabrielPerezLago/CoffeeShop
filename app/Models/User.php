@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 
 use http\Exception\RuntimeException;
@@ -22,7 +22,7 @@ class User
         return !isset(self::$userCollection) && is_null(self::$userCollection);
     }
 
-    public function create(string $name, string $email, string $password, ROLES|null $rol = null): string | null
+    public function create(string $name, string $email, string $password, ?string $rol = null): ?string
     {
         if (self::isCollectionNull()) return null;
 
@@ -32,19 +32,43 @@ class User
             throw new RuntimeException('El usuario ya existe');
 
         $response = self::$userCollection->insertOne([
-            'nombre' => trim($name),
+            'name' => trim($name),
             'email' => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT),
-            'rol' => is_null($rol) ? ROLES::valueOf($rol) : ROLES::CUSTOMER->value
+            'rol' => $rol !== null ? ROLES::valueOf($rol) ?? ROLES::CUSTOMER->value : ROLES::CUSTOMER->value
         ]);
 
         return (string) $response->getInsertedId();
     }
 
+    public function createAndGet(string $name, string $email, string $password, ?string $rol = null)
+    {
+        if (self::isCollectionNull()) return null;
 
-    public function findByEmail(string $email): ?array
+        $email = strtolower(trim($email));
+
+        if ($this->findByEmail($email))
+            throw new RuntimeException('El usuario ya existe');
+
+        $response = self::$userCollection->insertOne([
+            'name' => trim($name),
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'rol' => $rol !== null ? ROLES::valueOf($rol) ?? ROLES::CUSTOMER->value : ROLES::CUSTOMER->value
+        ]);
+
+        return $this->findById($response->getInsertedId());
+    }
+
+
+    public function findByEmail(string $email)
     {
         return self::$userCollection->findOne(['email' => strtolower(trim($email))]);
+    }
+
+    public function findById(string $_id)
+    {
+        return self::$userCollection->findOne(['_id' => new \MongoDB\BSON\ObjectId($_id)]);
     }
 
     public function getAll(): ?array

@@ -1,0 +1,22 @@
+
+.product-container {
+    padding: 1rem 0;
+    color: var(--dark-color);
+    background-color: var(--text-color);
+    width: 15rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0.1rem 0.2rem 0 var(--hover-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.product-img{
+    border-radius: 1rem;
+}
+.product-img img{
+    border-radius: 1rem;
+    width: 8rem;
+}

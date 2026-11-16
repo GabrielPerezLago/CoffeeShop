@@ -2,29 +2,26 @@
 
 namespace App\Controllers;
 
-use app\Models\User;
+use App\Models\User;
+use app\Security\ROLES;
 
 class UserController
 {
-    private static ?User $user;
+    private ?User $user;
 
     public function __construct()
     {
-        self::$user = new User();
-    }
-
-    private static function isUserModelNull(): bool
-    {
-        return !isset(self::$user) && is_null(self::$user);
+        $this->user = new User();
     }
 
     public function login(string $email, string $password): void
     {
         try
         {
-            if (self::isUserModelNull()) return;
 
-            $user = self::$user->findByEmail($email);
+            $user = $this->user->findByEmail($email);
+
+
 
             if (!password_verify($password, $user['password'])) return;
 
@@ -32,8 +29,8 @@ class UserController
 
             $_SESSION['rol'] = $user['rol'];
             $_SESSION['email'] = $user['email'];
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['usename'] = $user['name'];
+            $_SESSION['user_id'] = $user['_id'];
+            $_SESSION['username'] = $user['name'];
         }
         catch (\RuntimeException $excp)
         {
@@ -41,22 +38,22 @@ class UserController
         }
     }
 
-    public function regiter( string $name, string $email, string $password, ?string $rol): void
+    public function register( string $name, string $email, string $password, ?string $rol): void
     {
         try
         {
-            if (self::isUserModelNull()) return;
-            $user = self::$user->findByEmail($_POST['email']);
+            $user = $this->user->findByEmail($email);
             if ($user != null) return;
 
-            $user = self::$user->create($name, $email, $password, $rol ?? null);
-
+            $user = $this
+                ->user
+                ->createAndGet($name, $email, $password, $rol);
             if (is_null($user)) return;
 
             session_regenerate_id(true);
             $_SESSION['rol'] = $user['rol'];
             $_SESSION['email'] = $user['email'];
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['_id'];
             $_SESSION['username'] = $user['name'];
 
         }
@@ -64,6 +61,12 @@ class UserController
         {
             $error = $excp->getMessage();
         }
+    }
+
+    public function logout(): void
+    {
+        $_SESSION = [];
+        session_destroy();
     }
 
 

@@ -1,9 +1,14 @@
 <?php
-    use App\Controllers\UserController;
+    require_once __DIR__ . "/../../app/Controllers/UserController.php";
     use App\Security\ROLES;
+    use App\Controllers\UserController;
+    $toError = false;
+    $errorMessage = "";
 
-    $toError = true;
-    $errorMessage = "Hola";
+    if(isset($_SESSION['email']) && $_SESSION['email'] != '')
+    {
+        header('Location:?page=/profile');
+    }
     if (isset($_GET['action']) && ($_GET['action'] === 'login'|| $_GET['action'] === 'register') )
     {
         $newVal = ($_GET['action'] === 'register') ? '1' : '0';
@@ -25,7 +30,7 @@
         try
         {
             if ($is_register)
-                $user->register($username, $email, $password, ROLES::GUEST->value);
+                $user->register($username, $email, $password, ROLES::ADMIN->value);
 
             else
                 $user->login($email, $password);
@@ -35,20 +40,18 @@
                 header('Location:?page=/shop');
                 exit();
             }
-            else
-            {
-                $toError = true;
-                $errorMessage = "Error al iniciar sesión";
-            }
 
 
         }
         catch (Exception $excp)
         {
-            $exception = $excp
+            $toError = true;
+            $errorMessage = $excp
                     ->getMessage();
         }
     }
+
+    echo $toError;
 ?>
 
 <style>
@@ -58,12 +61,23 @@
         background-color: var(--secondary-color);
         width: 50vw;
         height: 50vh;
+        border-radius: 0.3rem;
         box-shadow: 0.1rem 0.1rem 0 var(--hover-color);
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         gap: 2rem;
+
+        h4 {
+            font-size: 4rem;
+        }
+
+        p
+        {
+            font-size: 2rem;
+            padding: 2rem;
+        }
     }
     .h3-form
     {
@@ -101,11 +115,24 @@
     {
         max-width: 50%;
     }
+    .password-container
+    {
+        display: flex;
+        align-items: center;
+        width: 40vw;
+        justify-content: flex-end;
+
+    }
+
+    .password-container img {
+        padding: 0.1rem;
+        position: absolute;
+    }
 </style>
 <section class="full-page">
     <div class="error-wizzard" <?php echo $toError ? 'style="display: flex;"' : 'style="display: none"; ' ?> >
         <h4 class="">Error</h4>
-        <p><?php echo $errorMessage ?? 'Prubea'; ?></p>
+        <p><?php echo $errorMessage; ?></p>
     </div>
     <h3 class="h3-form"><?php echo $is_register ? 'Registrarse' : 'Iniciar Sesión' ;?></h3>
     <form class="form_container" method="post">
@@ -113,8 +140,12 @@
           if  ($is_register) echo '<input name="name" type="text" placeholder="Nombre">';
         ?>
         <input name="email" type="email" placeholder="Email">
-        <input name="password" type="password" placeholder="Contraseña" >
-        <input type="button" class="form-btn btn btn-sm" <?php echo $is_register ? 'value="Registrarse"' : 'value="Iniciar Sesión"' ?>>
+        <div class="password-container">
+            <input type="password" id="pass_input" placeholder="Contraseña">
+            <img id="pass_icon" src="../public/assets/icons/eye_icon.svg" width="30" alt="EYE ICON">
+        </div>
+        <input type="submit" class="form-btn btn btn-sm" <?php echo $is_register ? 'value="Registrarse"' : 'value="Iniciar Sesión"' ?>>
         <a href="?page=/login&action=<?php echo $is_register ? 'login' : 'register'; ?>" class="form-btn btn-transparent"><?php echo $is_register ? 'Iniciar Sesión' : 'Registrate'?></a>
     </form>
 </section>
+<script src="../scripts/password.input.js" ></script>
