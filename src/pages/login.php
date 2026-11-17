@@ -30,7 +30,7 @@
         try
         {
             if ($is_register)
-                $user->register($username, $email, $password, ROLES::ADMIN->value);
+                $user->register($username, $email, $password);
 
             else
                 $user->login($email, $password);

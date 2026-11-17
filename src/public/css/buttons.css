@@ -45,3 +45,8 @@
 {
     background-color: var(--hover-color);
 }
+
+.btn-clean {
+    background-color: transparent;
+    border: none;
+}

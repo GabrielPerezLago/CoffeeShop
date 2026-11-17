@@ -38,7 +38,7 @@ class UserController
         }
     }
 
-    public function register( string $name, string $email, string $password, ?string $rol): void
+    public function register( string $name, string $email, string $password, ?string $rol = null): void
     {
         try
         {

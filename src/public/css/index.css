@@ -2,6 +2,7 @@
 @import url(text.font.css);
 @import url(buttons.css);
 @import url(pruduc.css);
+@import url(shop.css);
 :root {
     --primary-color: #3E2723;
     --secondary-color: #703B22;

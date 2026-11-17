@@ -15,9 +15,10 @@ class Library
         return $navbar($children);
     }
 
-    public static function product(?array $args): ?string
+    public function product(string $rol, ?array $args, ?string $route = null): ?string
     {
-        $product = require_once 'product.component.php';
-        return $product($args);
+        if ($rol == null) $route = '/shop';
+        $product = require 'product.component.php';
+        return $product($rol, $args, $route);
     }
 }
