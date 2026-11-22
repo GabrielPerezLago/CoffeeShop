@@ -2,7 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "8080:80"
+      - "8008:80"
     volumes:
       - "./:/var/www" 
     env_file:
